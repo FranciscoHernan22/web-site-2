@@ -1,17 +1,26 @@
 ---
-
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Planes from "../components/Planes.astro";
+import Frecuencia from "../components/Frecuencia.astro";
+import Encuesta from "../components/Encuesta.astro";
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <main>
+    <Hero />
+    <Planes />
+    <Frecuencia />
+    <Encuesta />
+
+    <footer class="w-full bg-[#0a0a0a] px-6 py-10 md:px-16 border-t border-white/8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <div>
+          <p class="font-['Bebas_Neue'] text-[22px] text-white tracking-wide">ENTRENADOR PERSONAL</p>
+          <p class="text-[11px] text-white/30 uppercase tracking-widest mt-0.5">ProGym 24/7</p>
+        </div>
+        <p class="text-xs text-white/25">Entrenamiento que se adapta a tu vida, para siempre.</p>
+      </div>
+    </footer>
+  </main>
+</Layout>

@@ -1,0 +1,113 @@
+---
+---
+
+<style>
+  .planes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 768px) {
+    .planes-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .plan-card {
+    position: relative;
+    background: #181818;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: clamp(24px, 4vw, 36px);
+  }
+  .plan-card.featured { border: 2px solid #e5c178; }
+  .plan-tag {
+    position: absolute;
+    top: -13px;
+    left: 18px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .plan-tag.dark { background:#181818; color:rgba(255,255,255,0.55); border:1px solid rgba(255,255,255,0.2); }
+  .plan-tag.gold  { background:#e5c178; color:#0a0a0a; }
+  .plan-list { list-style:none; display:flex; flex-direction:column; gap:10px; margin:20px 0 24px; }
+  .plan-list li { display:flex; align-items:flex-start; gap:10px; font-size:13px; color:rgba(255,255,255,0.5); line-height:1.5; }
+  .plan-list li i { color:#e5c178; flex-shrink:0; margin-top:1px; }
+  .plan-divider { border:none; border-top:1px solid rgba(255,255,255,0.08); margin:20px 0; }
+  .plan-price { display:flex; align-items:baseline; gap:4px; }
+  .plan-price-num { font-family:'Bebas Neue',sans-serif; font-size:clamp(40px,6vw,54px); color:#fff; line-height:1; }
+  .plan-price-sym { font-size:18px; color:rgba(255,255,255,0.3); font-weight:300; }
+  .plan-price-per { font-size:13px; color:rgba(255,255,255,0.35); margin-left:4px; }
+  .btn-ghost-plan {
+    display:block; width:100%; text-align:center;
+    border:1px solid rgba(255,255,255,0.18); color:rgba(255,255,255,0.65);
+    font-size:13px; font-family:'DM Sans',sans-serif;
+    padding:12px; border-radius:3px; text-decoration:none;
+    margin-top:16px; transition:all 0.15s;
+  }
+  .btn-ghost-plan:hover { border-color:rgba(255,255,255,0.5); color:#fff; }
+  .btn-gold-plan {
+    display:block; width:100%; text-align:center;
+    background:#e5c178; color:#0a0a0a;
+    font-size:13px; font-weight:500; font-family:'DM Sans',sans-serif;
+    padding:12px; border-radius:3px; text-decoration:none;
+    margin-top:16px; transition:opacity 0.15s;
+  }
+  .btn-gold-plan:hover { opacity:0.85; }
+</style>
+
+<section id="planes" style="width:100%;background:#111111;padding:clamp(48px,7vw,96px) clamp(24px,6vw,96px);">
+  <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#e5c178;margin-bottom:8px;">Planes</p>
+  <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(38px,6vw,56px);line-height:1;color:#fff;margin-bottom:clamp(28px,4vw,44px);">ELIGE TU PLAN</h2>
+
+  <div class="planes-grid">
+
+    <!-- Online -->
+    <div class="plan-card">
+      <span class="plan-tag dark">Online</span>
+      <i class="ti ti-device-laptop" style="font-size:26px;color:#e5c178;display:block;margin-bottom:16px;" aria-hidden="true"></i>
+      <h3 style="font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;">Rutina online</h3>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">
+        Plan de entrenamiento personalizado diseñado para tu objetivo y disponibilidad, con seguimiento mensual.
+      </p>
+      <ul class="plan-list">
+        <li><i class="ti ti-check" aria-hidden="true"></i>Plan estructurado mes a mes</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Adaptado a tu objetivo y condición física</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Ajuste del plan cada mes</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Seguimiento por mensajería</li>
+      </ul>
+      <hr class="plan-divider" />
+      <div class="plan-price">
+        <span class="plan-price-sym">$</span>
+        <span class="plan-price-num">2,000</span>
+        <span class="plan-price-per">/ mes</span>
+      </div>
+      <a href="#encuesta" class="btn-ghost-plan">Me interesa este plan</a>
+    </div>
+
+    <!-- Presencial -->
+    <div class="plan-card featured">
+      <span class="plan-tag gold">Presencial</span>
+      <i class="ti ti-barbell" style="font-size:26px;color:#e5c178;display:block;margin-bottom:16px;" aria-hidden="true"></i>
+      <h3 style="font-size:18px;font-weight:500;color:#fff;margin-bottom:8px;">Entrenamiento en el gym</h3>
+      <p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;">
+        Te acompaño en cada sesión dentro de ProGym 24/7. Técnica perfecta, progresión real, cero lesiones.
+      </p>
+      <ul class="plan-list">
+        <li><i class="ti ti-check" aria-hidden="true"></i>Corrección de técnica en tiempo real</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Atención a lesiones (rodilla, cadera, hombro, hernia)</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Equipos profesionales disponibles 24/7</li>
+        <li><i class="ti ti-check" aria-hidden="true"></i>Plan actualizado cada mes</li>
+      </ul>
+      <hr class="plan-divider" />
+      <div class="plan-price">
+        <span class="plan-price-sym">$</span>
+        <span class="plan-price-num">3,200</span>
+        <span class="plan-price-per">/ mes</span>
+      </div>
+      <a href="#encuesta" class="btn-gold-plan">Quiero entrenar presencial ↗</a>
+    </div>
+
+  </div>
+</section>
