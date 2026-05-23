@@ -7,7 +7,7 @@
   <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:32px;max-width:480px;line-height:1.7;">
     Responde estas preguntas para que pueda ver si somos un buen match y qué plan se adapta mejor a ti.
   </p>
-  <div id="survey-wrap" style="background:#181818;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:clamp(24px,5vw,48px);max-width:560px;">
+  <div id="survey-wrap" style="background:#181818;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:clamp(24px,5vw,48px);">
     <div id="prog" style="display:flex;gap:6px;margin-bottom:32px;"></div>
     <div id="sbody"></div>
   </div>
@@ -155,24 +155,31 @@ function chk() {
 }
 
 function done() {
-  var nombre = (ans["cnt"] && ans["cnt"].nombre) ? ans["cnt"].nombre : "t\xFA";
-  var mod = ans["mod"] || "";
-  var plan = mod.indexOf("presencial") > -1 ? "el entrenamiento presencial"
-           : mod.indexOf("online") > -1 ? "la rutina online"
-           : "el plan que mejor se ajusta a ti";
-
+  var nombre   = (ans["cnt"] && ans["cnt"].nombre) ? ans["cnt"].nombre : "Sin nombre";
+  var contacto = (ans["cnt"] && ans["cnt"].medio)  ? ans["cnt"].medio  : "Sin contacto";
+  var msg  = "uD83DuDCAA *Nueva consulta desde la web*\n\n";
+  msg += "uD83DuDC64 *Nombre:* "        + nombre   + "\n";
+  msg += "uD83DuDCF1 *Contacto:* "      + contacto + "\n\n";
+  msg += "uD83CuDFAF *Objetivo:* "      + (ans["obj"]  || "-") + "\n";
+  msg += "uD83CuDFCB *Experiencia:* "   + (ans["exp"]  || "-") + "\n";
+  msg += "uD83DuDCC5 *D�as:* "       + (ans["dias"] || "-") + "\n";
+  msg += "uD83EuDE79 *Lesi�n:* "     + (ans["les"]  || "-") + "\n";
+  msg += "uD83DuDCBC *Modalidad:* "     + (ans["mod"]  || "-") + "\n";
+  var url = "https://wa.me/526242465589?text=" + encodeURIComponent(msg);
   var bar = document.getElementById("prog");
   if (bar) { var ds = bar.querySelectorAll("div"); for (var i=0;i<ds.length;i++) ds[i].style.background="#e5c178"; }
-
   var body = document.getElementById("sbody");
   if (!body) return;
   body.innerHTML =
     '<div style="text-align:center;padding:20px 0;">' +
       '<i class="ti ti-circle-check" style="font-size:52px;color:#e5c178;display:block;margin-bottom:16px;"></i>' +
-      '<p style="font-family:\'Bebas Neue\',sans-serif;font-size:34px;color:#fff;margin-bottom:10px;">\xA1Listo, ' + nombre + '!</p>' +
-      '<p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:340px;margin:0 auto;">Recib\xED tus respuestas. Te contactar\xE9 pronto para platicar sobre <strong style="color:rgba(255,255,255,0.8);">' + plan + '</strong> y arrancar cuando t\xFA quieras.</p>' +
+      '<p style="font-family:Bebas Neue,sans-serif;font-size:34px;color:#fff;margin-bottom:10px;">�Listo, ' + nombre + '!</p>' +
+      '<p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:380px;margin:0 auto 24px;">Tus respuestas est�n listas. Toca el bot�n para enviarlas por WhatsApp.</p>' +
+      '<a href="' + url + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-family:DM Sans,sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:3px;text-decoration:none;">' +
+        '<i class="ti ti-brand-whatsapp" style="font-size:20px;"></i> Enviar por WhatsApp' +
+      '</a>' +
       '<div style="margin-top:20px;display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.1);padding:6px 16px;border-radius:999px;">' +
-        '<i class="ti ti-building"></i> ProGym 24/7 \xB7 Nos vemos pronto' +
+        '<i class="ti ti-building"></i> ProGym 24/7 � Nos vemos pronto' +
       '</div>' +
     '</div>';
 }
