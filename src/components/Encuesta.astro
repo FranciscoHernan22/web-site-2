@@ -5,7 +5,7 @@
   <p style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#e5c178;margin-bottom:8px;">Cuéntame sobre ti</p>
   <h2 style="font-family:'Bebas Neue',sans-serif;font-size:clamp(34px,5vw,52px);line-height:1;color:#fff;margin-bottom:8px;">ANTES DE EMPEZAR</h2>
   <p style="font-size:13px;color:rgba(255,255,255,0.35);margin-bottom:32px;max-width:480px;line-height:1.7;">
-    Responde estas preguntas para que pueda ver si somos un buen match y qué plan se adapta mejor a ti.
+    Responde estas preguntas para que pueda ver si somos un buen match y que plan se adapta mejor a ti.
   </p>
   <div id="survey-wrap" style="background:#181818;border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:clamp(24px,5vw,48px);">
     <div id="prog" style="display:flex;gap:6px;margin-bottom:32px;"></div>
@@ -17,49 +17,43 @@
 (function() {
 
 var SQ = [
-  { id:"obj",  label:"Pregunta 1 de 6", title:"&iquest;Cu&aacute;l es tu objetivo principal?", type:"single",
-    opts:["Ganar masa muscular","Bajar grasa corporal","Aumentar mi fuerza","Mejorar mi salud general","Recuperarme de una lesi\xF3n"] },
-  { id:"exp",  label:"Pregunta 2 de 6", title:"&iquest;Cu&aacute;nta experiencia tienes en el gym?", type:"single",
-    opts:["Nunca he entrenado","Menos de 6 meses","Entre 6 meses y 2 a\xF1os","M\xE1s de 2 a\xF1os"] },
-  { id:"dias", label:"Pregunta 3 de 6", title:"&iquest;Cu&aacute;ntos d&iacute;as a la semana puedes entrenar?", type:"single",
-    opts:["2 d\xEDas","3 d\xEDas","4 d\xEDas","5 d\xEDas o m\xE1s"] },
-  { id:"les",  label:"Pregunta 4 de 6", title:"&iquest;Tienes alguna lesi&oacute;n o condici&oacute;n f&iacute;sica?", type:"single",
-    opts:["No, estoy bien","Problemas de rodilla o cadera","Hernia discal o espalda","Lesi\xF3n de hombro","Otra condici\xF3n"] },
-  { id:"mod",  label:"Pregunta 5 de 6", title:"&iquest;Qu&eacute; modalidad te interesa?", type:"single",
-    opts:["Entrenamiento presencial en el gym ($3,200/mes)","Rutina online personalizada ($2,000/mes)","A\xFAn no lo s\xE9, necesito orientaci\xF3n"] },
-  { id:"cnt",  label:"Pregunta 6 de 6", title:"&iquest;C&oacute;mo te llamas y c&oacute;mo puedo contactarte?", type:"text",
+  { id:"obj",  label:"Pregunta 1 de 6", title:"Cual es tu objetivo principal?", type:"single",
+    opts:["Ganar masa muscular","Bajar grasa corporal","Aumentar mi fuerza","Mejorar mi salud general","Recuperarme de una lesion"] },
+  { id:"exp",  label:"Pregunta 2 de 6", title:"Cuanta experiencia tienes en el gym?", type:"single",
+    opts:["Nunca he entrenado","Menos de 6 meses","Entre 6 meses y 2 anos","Mas de 2 anos"] },
+  { id:"dias", label:"Pregunta 3 de 6", title:"Cuantos dias a la semana puedes entrenar?", type:"single",
+    opts:["2 dias","3 dias","4 dias","5 dias o mas"] },
+  { id:"les",  label:"Pregunta 4 de 6", title:"Tienes alguna lesion o condicion fisica?", type:"single",
+    opts:["No, estoy bien","Problemas de rodilla o cadera","Hernia discal o espalda","Lesion de hombro","Otra condicion"] },
+  { id:"mod",  label:"Pregunta 5 de 6", title:"Que modalidad te interesa?", type:"single",
+    opts:["Entrenamiento presencial en el gym ($3,200/mes)","Rutina online personalizada ($2,000/mes)","Aun no lo se, necesito orientacion"] },
+  { id:"cnt",  label:"Pregunta 6 de 6", title:"Como te llamas y como puedo contactarte?", type:"text",
     fields:[{key:"nombre",ph:"Tu nombre"},{key:"medio",ph:"WhatsApp o correo"}] }
 ];
 
 var cur = 0;
 var ans = {};
 
-var S = {
-  wrap: "background:#181818;border:1px solid rgba(255,255,255,0.1);border-radius:16px;",
-  label: "font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#e5c178;margin-bottom:8px;display:block;",
-  title: "font-family:'Bebas Neue',sans-serif;font-size:clamp(22px,4vw,30px);line-height:1.1;color:#fff;margin-bottom:20px;display:block;",
-  optBase: "display:flex;align-items:center;gap:12px;width:100%;padding:13px 16px;margin-bottom:8px;border-radius:10px;cursor:pointer;text-align:left;transition:border-color 0.15s,background 0.15s;font-family:'DM Sans',sans-serif;",
-  optNorm: "background:#111111;border:1px solid rgba(255,255,255,0.1);",
-  optSel:  "background:rgba(229,193,120,0.08);border:1px solid #e5c178;",
-  dotBase: "width:18px;height:18px;min-width:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;",
-  dotNorm: "border:1.5px solid rgba(255,255,255,0.25);",
-  dotSel:  "border:1.5px solid #e5c178;background:#e5c178;",
-  inner:   "width:6px;height:6px;border-radius:50%;background:#0a0a0a;",
-  lblNorm: "font-size:13px;color:rgba(255,255,255,0.6);",
-  lblSel:  "font-size:13px;color:#fff;",
-  input:   "display:block;width:100%;padding:13px 16px;margin-bottom:10px;background:#111111;border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:13px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;",
-  navRow:  "display:flex;align-items:center;justify-content:space-between;margin-top:28px;",
-  btnBack: "font-size:13px;color:rgba(255,255,255,0.3);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;",
-  btnNext: "background:#e5c178;color:#0a0a0a;border:none;padding:11px 28px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:3px;",
-  count:   "font-size:12px;color:rgba(255,255,255,0.2);"
-};
+var OB = "display:flex;align-items:center;gap:12px;width:100%;padding:13px 16px;margin-bottom:8px;border-radius:10px;cursor:pointer;text-align:left;font-family:'DM Sans',sans-serif;";
+var ON = "background:#111111;border:1px solid rgba(255,255,255,0.1);";
+var OS = "background:rgba(229,193,120,0.08);border:1px solid #e5c178;";
+var DB = "width:18px;height:18px;min-width:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;";
+var DN = "border:1.5px solid rgba(255,255,255,0.25);";
+var DS = "border:1.5px solid #e5c178;background:#e5c178;";
+var DI = "width:6px;height:6px;border-radius:50%;background:#0a0a0a;";
+var LN = "font-size:13px;color:rgba(255,255,255,0.6);";
+var LS = "font-size:13px;color:#fff;";
+var II = "display:block;width:100%;padding:13px 16px;margin-bottom:10px;background:#111111;border:1px solid rgba(255,255,255,0.12);border-radius:10px;font-size:13px;color:#fff;font-family:'DM Sans',sans-serif;outline:none;";
+var NR = "display:flex;align-items:center;justify-content:space-between;margin-top:28px;";
+var BB = "font-size:13px;color:rgba(255,255,255,0.3);background:none;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;padding:0;";
+var NB = "background:#e5c178;color:#0a0a0a;border:none;padding:11px 28px;font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;cursor:pointer;border-radius:3px;";
 
 function prog() {
   var bar = document.getElementById("prog");
   if (!bar) return;
   var h = "";
   for (var i = 0; i < SQ.length; i++) {
-    h += '<div style="height:3px;flex:1;border-radius:999px;transition:background 0.3s;background:' + (i <= cur ? '#e5c178' : 'rgba(255,255,255,0.1)') + '"></div>';
+    h += '<div style="height:3px;flex:1;border-radius:999px;background:' + (i <= cur ? '#e5c178' : 'rgba(255,255,255,0.1)') + '"></div>';
   }
   bar.innerHTML = h;
 }
@@ -67,39 +61,38 @@ function prog() {
 function render() {
   prog();
   var q = SQ[cur];
-  var h = '<span style="' + S.label + '">' + q.label + '</span>';
-  h += '<span style="' + S.title + '">' + q.title + '</span>';
+  var h = '<span style="font-size:11px;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#e5c178;margin-bottom:8px;display:block;">' + q.label + '</span>';
+  h += '<span style="font-family:\'Bebas Neue\',sans-serif;font-size:clamp(22px,4vw,30px);line-height:1.1;color:#fff;margin-bottom:20px;display:block;">' + q.title + '</span>';
 
   if (q.type === "single") {
     for (var i = 0; i < q.opts.length; i++) {
       var o = q.opts[i];
       var sel = ans[q.id] === o;
-      h += '<button data-idx="' + i + '" style="' + S.optBase + (sel ? S.optSel : S.optNorm) + '">';
-      h += '<span style="' + S.dotBase + (sel ? S.dotSel : S.dotNorm) + '">';
-      if (sel) h += '<span style="' + S.inner + '"></span>';
+      h += '<button data-idx="' + i + '" style="' + OB + (sel ? OS : ON) + '">';
+      h += '<span style="' + DB + (sel ? DS : DN) + '">';
+      if (sel) h += '<span style="' + DI + '"></span>';
       h += '</span>';
-      h += '<span style="' + (sel ? S.lblSel : S.lblNorm) + '">' + o + '</span>';
+      h += '<span style="' + (sel ? LS : LN) + '">' + o + '</span>';
       h += '</button>';
     }
   } else {
     for (var j = 0; j < q.fields.length; j++) {
       var f = q.fields[j];
       var val = (ans[q.id] && ans[q.id][f.key]) ? ans[q.id][f.key] : "";
-      h += '<input data-k="' + f.key + '" placeholder="' + f.ph + '" value="' + val + '" style="' + S.input + '" />';
+      h += '<input data-k="' + f.key + '" placeholder="' + f.ph + '" value="' + val + '" style="' + II + '" />';
     }
   }
 
-  h += '<div style="' + S.navRow + '">';
-  h += '<button id="e-bk" style="' + S.btnBack + 'visibility:' + (cur === 0 ? 'hidden' : 'visible') + ';">\u2190 Atr\xE1s</button>';
-  h += '<span style="' + S.count + '">' + (cur + 1) + ' / ' + SQ.length + '</span>';
-  h += '<button id="e-nx" style="' + S.btnNext + 'opacity:0.3;cursor:not-allowed;">' + (cur === SQ.length - 1 ? 'Enviar \u2197' : 'Siguiente \u2192') + '</button>';
+  h += '<div style="' + NR + '">';
+  h += '<button id="e-bk" style="' + BB + 'visibility:' + (cur === 0 ? 'hidden' : 'visible') + ';">Atras</button>';
+  h += '<span style="font-size:12px;color:rgba(255,255,255,0.2);">' + (cur + 1) + ' / ' + SQ.length + '</span>';
+  h += '<button id="e-nx" style="' + NB + 'opacity:0.3;cursor:not-allowed;">' + (cur === SQ.length - 1 ? 'Enviar' : 'Siguiente') + '</button>';
   h += '</div>';
 
   var body = document.getElementById("sbody");
   if (!body) return;
   body.innerHTML = h;
 
-  // bind option buttons
   var btns = body.querySelectorAll("button[data-idx]");
   for (var bi = 0; bi < btns.length; bi++) {
     (function(btn, qref) {
@@ -110,7 +103,6 @@ function render() {
     })(btns[bi], q);
   }
 
-  // bind text inputs
   var inputs = body.querySelectorAll("input[data-k]");
   for (var ii = 0; ii < inputs.length; ii++) {
     (function(inp, qref) {
@@ -157,29 +149,37 @@ function chk() {
 function done() {
   var nombre   = (ans["cnt"] && ans["cnt"].nombre) ? ans["cnt"].nombre : "Sin nombre";
   var contacto = (ans["cnt"] && ans["cnt"].medio)  ? ans["cnt"].medio  : "Sin contacto";
-  var msg  = "uD83DuDCAA *Nueva consulta desde la web*\n\n";
-  msg += "uD83DuDC64 *Nombre:* "        + nombre   + "\n";
-  msg += "uD83DuDCF1 *Contacto:* "      + contacto + "\n\n";
-  msg += "uD83CuDFAF *Objetivo:* "      + (ans["obj"]  || "-") + "\n";
-  msg += "uD83CuDFCB *Experiencia:* "   + (ans["exp"]  || "-") + "\n";
-  msg += "uD83DuDCC5 *D�as:* "       + (ans["dias"] || "-") + "\n";
-  msg += "uD83EuDE79 *Lesi�n:* "     + (ans["les"]  || "-") + "\n";
-  msg += "uD83DuDCBC *Modalidad:* "     + (ans["mod"]  || "-") + "\n";
+
+  var msg = "";
+  msg += "💪 Nueva consulta desde la web\n\n";
+  msg += "👤 Nombre: "     + nombre            + "\n";
+  msg += "Contacto: "   + contacto          + "\n\n";
+  msg += "🎯 Objetivo: "   + (ans["obj"]  || "-") + "\n";
+  msg += "Experiencia: "+ (ans["exp"]  || "-") + "\n";
+  msg += "Dias: "       + (ans["dias"] || "-") + "\n";
+  msg += "Lesion: "     + (ans["les"]  || "-") + "\n";
+  msg += "Modalidad: "  + (ans["mod"]  || "-") + "\n";
+
   var url = "https://wa.me/526242404890?text=" + encodeURIComponent(msg);
+
   var bar = document.getElementById("prog");
-  if (bar) { var ds = bar.querySelectorAll("div"); for (var i=0;i<ds.length;i++) ds[i].style.background="#e5c178"; }
+  if (bar) {
+    var ds = bar.querySelectorAll("div");
+    for (var i = 0; i < ds.length; i++) ds[i].style.background = "#e5c178";
+  }
+
   var body = document.getElementById("sbody");
   if (!body) return;
   body.innerHTML =
     '<div style="text-align:center;padding:20px 0;">' +
-      '<i class="ti ti-circle-check" style="font-size:52px;color:#e5c178;display:block;margin-bottom:16px;"></i>' +
-      '<p style="font-family:Bebas Neue,sans-serif;font-size:34px;color:#fff;margin-bottom:10px;">�Listo, ' + nombre + '!</p>' +
-      '<p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:380px;margin:0 auto 24px;">Tus respuestas est�n listas. Toca el bot�n para enviarlas por WhatsApp.</p>' +
-      '<a href="' + url + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-family:DM Sans,sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:3px;text-decoration:none;">' +
-        '<i class="ti ti-brand-whatsapp" style="font-size:20px;"></i> Enviar por WhatsApp' +
+      '<div style="font-size:52px;margin-bottom:16px;">&#10003;</div>' +
+      '<p style="font-family:\'Bebas Neue\',sans-serif;font-size:34px;color:#fff;margin-bottom:10px;">Listo, ' + nombre + '!</p>' +
+      '<p style="font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;max-width:380px;margin:0 auto 24px;">Tus respuestas estan listas. Toca el boton para enviarlas por WhatsApp.</p>' +
+      '<a href="' + url + '" target="_blank" style="display:inline-flex;align-items:center;gap:10px;background:#25D366;color:#fff;font-family:\'DM Sans\',sans-serif;font-size:14px;font-weight:500;padding:14px 28px;border-radius:3px;text-decoration:none;">' +
+        'Enviar por WhatsApp' +
       '</a>' +
       '<div style="margin-top:20px;display:inline-flex;align-items:center;gap:6px;font-size:11px;color:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.1);padding:6px 16px;border-radius:999px;">' +
-        '<i class="ti ti-building"></i> ProGym 24/7 � Nos vemos pronto' +
+        'ProGym 24/7 - Nos vemos pronto' +
       '</div>' +
     '</div>';
 }
