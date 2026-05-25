@@ -17,17 +17,31 @@
 (function() {
 
 var SQ = [
-  { id:"obj",  label:"Pregunta 1 de 6", title:"Cual es tu objetivo principal?", type:"single",
+  { id:"obj", label:"Pregunta 1 de 9", title:"Cual es tu objetivo principal?", type:"single",
     opts:["Ganar masa muscular","Bajar grasa corporal","Aumentar mi fuerza","Mejorar mi salud general","Recuperarme de una lesion"] },
-  { id:"exp",  label:"Pregunta 2 de 6", title:"Cuanta experiencia tienes en el gym?", type:"single",
+
+  { id:"exp", label:"Pregunta 2 de 9", title:"Cuanta experiencia tienes en el gym?", type:"single",
     opts:["Nunca he entrenado","Menos de 6 meses","Entre 6 meses y 2 anos","Mas de 2 anos"] },
-  { id:"dias", label:"Pregunta 3 de 6", title:"Cuantos dias a la semana puedes entrenar?", type:"single",
+
+  { id:"prev", label:"Pregunta 3 de 9", title:"Has trabajado antes con un entrenador personal?", type:"single",
+    opts:["No, seria mi primera vez","Si, pero hace tiempo","Si, actualmente tengo uno","Si y no me funciono"] },
+
+  { id:"dias", label:"Pregunta 4 de 9", title:"Cuantos dias a la semana puedes entrenar?", type:"single",
     opts:["2 dias","3 dias","4 dias","5 dias o mas"] },
-  { id:"les",  label:"Pregunta 4 de 6", title:"Tienes alguna lesion o condicion fisica?", type:"single",
+
+  { id:"hora", label:"Pregunta 5 de 9", title:"En que horario puedes entrenar?", type:"single",
+    opts:["Manana (6am - 12pm)","Tarde (12pm - 5pm)","Noche (5pm - 10pm)","Horario variable"] },
+
+  { id:"les", label:"Pregunta 6 de 9", title:"Tienes alguna lesion o condicion fisica?", type:"single",
     opts:["No, estoy bien","Problemas de rodilla o cadera","Hernia discal o espalda","Lesion de hombro","Otra condicion"] },
-  { id:"mod",  label:"Pregunta 5 de 6", title:"Que modalidad te interesa?", type:"single",
+
+  { id:"mod", label:"Pregunta 7 de 9", title:"Que modalidad te interesa?", type:"single",
     opts:["Entrenamiento presencial en el gym ($3,200/mes)","Rutina online personalizada ($2,000/mes)","Aun no lo se, necesito orientacion"] },
-  { id:"cnt",  label:"Pregunta 6 de 6", title:"Como te llamas y como puedo contactarte?", type:"text",
+
+  { id:"start", label:"Pregunta 8 de 9", title:"Cuando quieres empezar?", type:"single",
+    opts:["Esta semana","Este mes","En uno o dos meses","Solo estoy cotizando"] },
+
+  { id:"cnt", label:"Pregunta 9 de 9", title:"Como te llamas y como puedo contactarte?", type:"text",
     fields:[{key:"nombre",ph:"Tu nombre"},{key:"medio",ph:"WhatsApp o correo"}] }
 ];
 
@@ -152,13 +166,16 @@ function done() {
 
   var msg = "";
   msg += "💪 Nueva consulta desde la web\n\n";
-  msg += "👤 Nombre: "     + nombre            + "\n";
-  msg += "Contacto: "   + contacto          + "\n\n";
-  msg += "🎯 Objetivo: "   + (ans["obj"]  || "-") + "\n";
-  msg += "Experiencia: "+ (ans["exp"]  || "-") + "\n";
-  msg += "Dias: "       + (ans["dias"] || "-") + "\n";
-  msg += "Lesion: "     + (ans["les"]  || "-") + "\n";
-  msg += "Modalidad: "  + (ans["mod"]  || "-") + "\n";
+  msg += "👤 Nombre: "        + nombre               + "\n";
+  msg += "Contacto: "         + contacto             + "\n\n";
+  msg += "🎯 Objetivo: "      + (ans["obj"]   || "-") + "\n";
+  msg += "Experiencia: "      + (ans["exp"]   || "-") + "\n";
+  msg += "Entrenador previo: "+ (ans["prev"]  || "-") + "\n";
+  msg += "Dias: "             + (ans["dias"]  || "-") + "\n";
+  msg += "Horario: "          + (ans["hora"]  || "-") + "\n";
+  msg += "Lesion: "           + (ans["les"]   || "-") + "\n";
+  msg += "Modalidad: "        + (ans["mod"]   || "-") + "\n";
+  msg += "Cuando empieza: "   + (ans["start"] || "-") + "\n";
 
   var url = "https://wa.me/526242404890?text=" + encodeURIComponent(msg);
 
