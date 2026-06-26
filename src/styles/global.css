@@ -16,3 +16,15 @@ body {
   color: #fff;
   overflow-x: hidden;
 }
+
+/* Fix barra negra arriba */
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
