@@ -1,0 +1,28 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Planes from "../components/Planes.astro";
+import Frecuencia from "../components/Frecuencia.astro";
+import Encuesta from "../components/Encuesta.astro";
+import Beneficios from "../components/Beneficios.astro";
+---
+
+<Layout>
+  <main>
+    <Hero />
+    <Planes />
+    <Frecuencia />
+    <Beneficios />
+    <Encuesta />
+
+    <footer class="w-full bg-[#0a0a0a] px-6 py-10 md:px-16 border-t border-white/8">
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
+        <div>
+          <p class="font-['Bebas_Neue'] text-[22px] text-white tracking-wide">FH PERFORMANCE ENTRENADOR PERSONAL </p>
+          <p class="text-[11px] text-white/30 uppercase tracking-widest mt-0.5">ProGym 24/7</p>
+        </div>
+        <p class="text-xs text-white/25">Entrenamiento que se adapta a tu vida, para siempre.</p>
+      </div>
+    </footer>
+  </main>
+</Layout>
