@@ -1,7 +1,16 @@
 {
+<<<<<<< HEAD
   "name": "belleza-web",
   "type": "module",
   "version": "0.0.1",
+=======
+  "name": "entrenador-site",
+  "type": "module",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+>>>>>>> dc43b6306cfd7168c943ed7efc01193aa023f6a2
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -9,6 +18,7 @@
     "astro": "astro"
   },
   "dependencies": {
+<<<<<<< HEAD
     "@astrojs/vercel": "^9.0.2",
     "astro": "^5.16.6",
     "nodemailer": "^7.0.13",
@@ -20,5 +30,10 @@
     "autoprefixer": "^10.4.23",
     "postcss": "^8.5.6",
     "tailwindcss": "^3.4.19"
+=======
+    "@tailwindcss/vite": "^4.3.0",
+    "astro": "^6.3.7",
+    "tailwindcss": "^4.3.0"
+>>>>>>> dc43b6306cfd7168c943ed7efc01193aa023f6a2
   }
 }
