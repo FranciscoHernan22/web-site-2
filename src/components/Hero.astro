@@ -40,8 +40,6 @@
 </section>
 
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
   .gym-hero {
     position: relative;
     min-height: 100svh;
@@ -52,6 +50,7 @@
     background: url('/img/4.png') center top / cover no-repeat;
   }
 
+  /* Desktop: gradiente de izquierda a derecha */
   .gym-hero::before {
     content: '';
     position: absolute;
@@ -59,9 +58,9 @@
     background: linear-gradient(
       to right,
       rgba(8,8,8,0.97) 0%,
-      rgba(8,8,8,0.92) 45%,
-      rgba(8,8,8,0.55) 75%,
-      rgba(8,8,8,0.2) 100%
+      rgba(8,8,8,0.90) 45%,
+      rgba(8,8,8,0.45) 70%,
+      rgba(8,8,8,0.10) 100%
     );
     z-index: 1;
   }
@@ -205,13 +204,34 @@
 
   /* ── Móvil ── */
   @media (max-width: 480px) {
-    .gym-hero::before {
-      background: rgba(8,8,8,0.88);
+    /* Imagen centrada en móvil */
+    .gym-hero {
+      background-position: 65% center;
+      align-items: flex-end;
     }
+
+    /* Gradiente de abajo hacia arriba — imagen visible arriba, texto legible abajo */
+    .gym-hero::before {
+      background: linear-gradient(
+        to top,
+        rgba(8,8,8,1.00) 0%,
+        rgba(8,8,8,0.92) 35%,
+        rgba(8,8,8,0.45) 60%,
+        rgba(8,8,8,0.10) 100%
+      );
+    }
+
+    /* Contenido pegado abajo */
+    .gym-content {
+      max-width: 100%;
+      padding: 24px 24px 48px 24px;
+      justify-content: flex-end;
+    }
+
+    /* Stats en grid 2x2 */
     .stats-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      border-left: 2px solid #e5c178;
     }
     .stat-item {
       border-right: 1px solid rgba(255,255,255,0.07);
@@ -222,6 +242,8 @@
     .stat-item:nth-child(4) { border-right: none; }
     .stat-item:nth-child(3),
     .stat-item:nth-child(4) { border-bottom: none; }
+
+    /* Botones full width */
     .ctas {
       flex-direction: column;
       align-items: stretch;
