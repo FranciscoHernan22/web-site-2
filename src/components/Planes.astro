@@ -1,0 +1,145 @@
+---
+---
+<section id="planes" class="planes-sec">
+  <p class="planes-label">Planes</p>
+  <h2 class="planes-h2">ELIGE TU PLAN</h2>
+  <div class="planes-grid">
+
+    <div class="plan-card">
+      <span class="plan-tag dark">Online</span>
+      <svg class="plan-icon" viewBox="0 0 24 24" fill="none" stroke="#e5c178" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      <h3 class="plan-title">Rutina online</h3>
+      <p class="plan-desc">Plan personalizado para tu objetivo y disponibilidad, con seguimiento mensual.</p>
+      <ul class="plan-list">
+        <li>Plan estructurado semana a semana</li>
+        <li>Adaptado a tu objetivo y condición física</li>
+        <li>Ajuste del plan cada mes</li>
+        <li>Seguimiento por mensajería</li>
+      </ul>
+      <hr class="plan-hr"/>
+      <div class="plan-price"><span class="sym">$</span><span class="num">2,000</span><span class="per">/ mes</span></div>
+      <a href="#encuesta" class="btn-outline">Me interesa este plan</a>
+    </div>
+
+    <div class="plan-card featured">
+      <span class="plan-tag gold">Presencial</span>
+      <svg class="plan-icon" viewBox="0 0 24 24" fill="none" stroke="#e5c178" stroke-width="1.5"><path d="M6 4h12M6 20h12M8 4v16M16 4v16M3 8h3M18 8h3M3 16h3M18 16h3"/></svg>
+      <h3 class="plan-title">Entrenamiento en el gym</h3>
+      <p class="plan-desc">Te acompaño en cada sesión dentro de ProGym 24/7. Técnica perfecta, progresión real, cero lesiones.</p>
+      <ul class="plan-list">
+        <li>Corrección de técnica en tiempo real</li>
+        <li>Atención a lesiones (rodilla, cadera, hombro, hernia)</li>
+        <li>Equipos profesionales disponibles 24/7</li>
+        <li>Plan actualizado cada mes</li>
+      </ul>
+      <hr class="plan-hr"/>
+      <div class="plan-price"><span class="sym">$</span><span class="num">3,200</span><span class="per">/ mes</span></div>
+      <a href="#encuesta" class="btn-gold">Quiero entrenar presencial ↗</a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .planes-sec {
+    width: 100%;
+    background: #111;
+    padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    box-sizing: border-box;
+  }
+  .planes-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e5c178;
+    margin-bottom: 8px;
+  }
+  .planes-h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(32px, 6vw, 56px);
+    line-height: 1;
+    color: #fff;
+    margin-bottom: clamp(24px, 4vw, 44px);
+  }
+  .planes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+  }
+  .plan-card {
+    position: relative;
+    background: #181818;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: clamp(24px, 4vw, 36px);
+    box-sizing: border-box;
+  }
+  .plan-card.featured { border: 2px solid #e5c178; }
+  .plan-tag {
+    position: absolute;
+    top: -13px;
+    left: 18px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 999px;
+  }
+  .plan-tag.dark { background: #181818; color: rgba(255,255,255,0.55); border: 1px solid rgba(255,255,255,0.2); }
+  .plan-tag.gold { background: #e5c178; color: #0a0a0a; }
+  .plan-icon { width: 28px; height: 28px; margin-bottom: 16px; display: block; }
+  .plan-title { font-size: 17px; font-weight: 500; color: #fff; margin-bottom: 8px; }
+  .plan-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 20px; }
+  .plan-list { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+  .plan-list li {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    padding-left: 18px;
+    position: relative;
+    line-height: 1.5;
+  }
+  .plan-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: #e5c178;
+    font-size: 12px;
+  }
+  .plan-hr { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin-bottom: 20px; }
+  .plan-price { display: flex; align-items: baseline; gap: 4px; margin-bottom: 16px; }
+  .plan-price .sym { font-size: 18px; color: rgba(255,255,255,0.3); font-weight: 300; }
+  .plan-price .num { font-family: 'Bebas Neue', sans-serif; font-size: clamp(36px, 8vw, 52px); color: #fff; line-height: 1; }
+  .plan-price .per { font-size: 13px; color: rgba(255,255,255,0.35); margin-left: 4px; }
+  .btn-outline {
+    display: block;
+    width: 100%;
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.65);
+    font-size: 13px;
+    padding: 13px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: all 0.15s;
+    box-sizing: border-box;
+  }
+  .btn-outline:hover { border-color: rgba(255,255,255,0.5); color: #fff; }
+  .btn-gold {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: #e5c178;
+    color: #0a0a0a;
+    font-size: 13px;
+    font-weight: 500;
+    padding: 13px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: opacity 0.15s;
+    box-sizing: border-box;
+  }
+  .btn-gold:hover { opacity: 0.85; }
+</style>

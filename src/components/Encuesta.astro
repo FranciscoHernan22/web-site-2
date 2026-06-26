@@ -1,0 +1,246 @@
+---
+---
+
+<section id="encuesta" class="px-8 py-16 md:px-16">
+  <p class="text-[11px] font-medium tracking-widest uppercase text-[#e5c178] mb-1.5">Cuéntame sobre ti</p>
+  <h2 class="font-display text-[42px] leading-none text-neutral-900 mb-2">ANTES DE EMPEZAR</h2>
+  <p class="text-sm text-neutral-500 leading-relaxed mb-8 max-w-xl">
+    Responde estas preguntas para que pueda ver si somos un buen match y qué plan se adapta mejor a ti.
+  </p>
+
+  <div class="bg-neutral-50 border border-neutral-200 rounded-xl p-8 max-w-xl">
+
+    <!-- progress -->
+    <div id="progress-bar" class="flex gap-1 mb-8">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div
+          class="h-0.5 flex-1 rounded-full bg-neutral-200"
+          data-index={i}
+        ></div>
+      ))}
+    </div>
+
+    <!-- body -->
+    <div id="survey-body"></div>
+
+  </div>
+</section>
+
+<script>
+  const questions = [
+    {
+      id: "objetivo",
+      label: "Pregunta 1 de 6",
+      title: "¿Cuál es tu objetivo principal?",
+      type: "single",
+      options: [
+        "Ganar masa muscular",
+        "Bajar grasa corporal",
+        "Aumentar mi fuerza",
+        "Mejorar mi salud general",
+        "Recuperarme de una lesión",
+      ],
+    },
+    {
+      id: "experiencia",
+      label: "Pregunta 2 de 6",
+      title: "¿Cuánta experiencia tienes en el gym?",
+      type: "single",
+      options: [
+        "Nunca he entrenado",
+        "Menos de 6 meses",
+        "Entre 6 meses y 2 años",
+        "Más de 2 años",
+      ],
+    },
+    {
+      id: "dias",
+      label: "Pregunta 3 de 6",
+      title: "¿Cuántos días a la semana puedes entrenar?",
+      type: "single",
+      options: ["2 días", "3 días", "4 días", "5 días o más"],
+    },
+    {
+      id: "lesion",
+      label: "Pregunta 4 de 6",
+      title: "¿Tienes alguna lesión o condición física?",
+      type: "single",
+      options: [
+        "No, estoy bien",
+        "Problemas de rodilla o cadera",
+        "Hernia discal o espalda",
+        "Lesión de hombro",
+        "Otra condición",
+      ],
+    },
+    {
+      id: "modalidad",
+      label: "Pregunta 5 de 6",
+      title: "¿Qué modalidad te interesa?",
+      type: "single",
+      options: [
+        "Entrenamiento presencial en el gym ($3,200/mes)",
+        "Rutina online personalizada ($2,000/mes)",
+        "Aún no lo sé, necesito orientación",
+      ],
+    },
+    {
+      id: "contacto",
+      label: "Pregunta 6 de 6",
+      title: "¿Cómo te llamas y cómo puedo contactarte?",
+      type: "text",
+      fields: [
+        { key: "nombre", placeholder: "Tu nombre", type: "text" },
+        { key: "medio", placeholder: "WhatsApp o correo", type: "text" },
+      ],
+    },
+  ];
+
+  let current = 0;
+  const answers: Record<string, any> = {};
+
+  function updateProgress() {
+    const dots = document.querySelectorAll<HTMLElement>("#progress-bar [data-index]");
+    dots.forEach((dot, i) => {
+      dot.style.background = i <= current ? "#e5c178" : "";
+      dot.classList.toggle("bg-neutral-200", i > current);
+    });
+  }
+
+  function render() {
+    const q = questions[current];
+    const body = document.getElementById("survey-body")!;
+    updateProgress();
+
+    let html = `
+      <p class="text-[11px] font-medium tracking-widest uppercase text-[#e5c178] mb-2">${q.label}</p>
+      <h3 class="font-display text-[28px] leading-tight text-neutral-900 mb-6">${q.title}</h3>
+    `;
+
+    if (q.type === "single") {
+      html += `<div class="flex flex-col gap-2">`;
+      q.options!.forEach((opt: string) => {
+        const sel = answers[q.id] === opt;
+        html += `
+          <button
+            data-opt="${opt.replace(/"/g, "&quot;")}"
+            class="option-btn flex items-center gap-3 px-4 py-3.5 bg-white border rounded-lg text-left transition-colors text-sm text-neutral-800 ${sel ? "border-[#e5c178]" : "border-neutral-200 hover:border-neutral-400"}"
+          >
+            <span class="option-dot w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center ${sel ? "border-[#e5c178] bg-[#e5c178]" : "border-neutral-300"}">
+              ${sel ? `<span class="w-1.5 h-1.5 rounded-full bg-[#0a0a0a] block"></span>` : ""}
+            </span>
+            ${opt}
+          </button>
+        `;
+      });
+      html += `</div>`;
+    } else {
+      html += `<div class="flex flex-col gap-3">`;
+      q.fields!.forEach((f: { key: string; placeholder: string; type: string }) => {
+        const val = answers[q.id]?.[f.key] ?? "";
+        html += `
+          <input
+            data-key="${f.key}"
+            type="${f.type}"
+            placeholder="${f.placeholder}"
+            value="${val}"
+            class="text-field w-full px-4 py-3 bg-white border border-neutral-200 rounded-lg text-sm text-neutral-900 placeholder-neutral-400 outline-none focus:border-[#e5c178] transition-colors"
+          />
+        `;
+      });
+      html += `</div>`;
+    }
+
+    html += `
+      <div class="flex items-center justify-between mt-8">
+        <button id="btn-back" class="text-sm text-neutral-400 hover:text-neutral-700 transition-colors ${current === 0 ? "invisible" : ""}">
+          ← Atrás
+        </button>
+        <span class="text-xs text-neutral-400">${current + 1} / ${questions.length}</span>
+        <button id="btn-next" class="bg-[#e5c178] text-[#0a0a0a] text-sm font-medium px-6 py-2.5 rounded-sm transition-opacity disabled:opacity-30 disabled:cursor-not-allowed hover:opacity-85">
+          ${current === questions.length - 1 ? "Enviar ↗" : "Siguiente →"}
+        </button>
+      </div>
+    `;
+
+    body.innerHTML = html;
+    bindEvents();
+    checkNext();
+  }
+
+  function bindEvents() {
+    const q = questions[current];
+
+    document.querySelectorAll<HTMLButtonElement>(".option-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        answers[q.id] = btn.dataset.opt;
+        render();
+      });
+    });
+
+    document.querySelectorAll<HTMLInputElement>(".text-field").forEach((input) => {
+      input.addEventListener("input", () => {
+        if (!answers[q.id]) answers[q.id] = {};
+        answers[q.id][input.dataset.key!] = input.value;
+        checkNext();
+      });
+    });
+
+    document.getElementById("btn-next")?.addEventListener("click", () => {
+      if (current < questions.length - 1) {
+        current++;
+        render();
+      } else {
+        showSuccess();
+      }
+    });
+
+    document.getElementById("btn-back")?.addEventListener("click", () => {
+      if (current > 0) { current--; render(); }
+    });
+  }
+
+  function checkNext() {
+    const btn = document.getElementById("btn-next") as HTMLButtonElement | null;
+    if (!btn) return;
+    const q = questions[current];
+    let valid = false;
+    if (q.type === "single") valid = !!answers[q.id];
+    if (q.type === "text") {
+      const a = answers[q.id] ?? {};
+      valid = q.fields!.every((f: { key: string }) => a[f.key]?.trim());
+    }
+    btn.disabled = !valid;
+  }
+
+  function showSuccess() {
+    const nombre = answers["contacto"]?.nombre ?? "tú";
+    const modalidad = answers["modalidad"] ?? "";
+    let plan = "el plan que mejor se ajusta a ti";
+    if (modalidad.includes("presencial")) plan = "el entrenamiento presencial";
+    else if (modalidad.includes("online")) plan = "la rutina online";
+
+    // fill all progress
+    document.querySelectorAll<HTMLElement>("#progress-bar [data-index]").forEach((d) => {
+      d.style.background = "#e5c178";
+      d.classList.remove("bg-neutral-200");
+    });
+
+    document.getElementById("survey-body")!.innerHTML = `
+      <div class="text-center py-4">
+        <i class="ti ti-circle-check text-[48px] text-[#e5c178] mb-4 block" aria-hidden="true"></i>
+        <h3 class="font-display text-[32px] text-neutral-900 mb-3">¡Listo, ${nombre}!</h3>
+        <p class="text-sm text-neutral-500 leading-relaxed max-w-sm mx-auto">
+          Recibí tus respuestas. Basado en lo que me dijiste, te contactaré pronto para platicar sobre
+          <strong class="text-neutral-700">${plan}</strong> y arrancar cuando tú quieras.
+        </p>
+        <div class="mt-4 inline-flex items-center gap-2 text-xs text-neutral-400 border border-neutral-200 px-4 py-2 rounded-full">
+          <i class="ti ti-building" aria-hidden="true"></i>
+          ProGym 24/7 · Nos vemos pronto
+        </div>
+      </div>
+    `;
+  }
+
+  render();
+</script>

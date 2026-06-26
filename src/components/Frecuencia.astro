@@ -1,0 +1,116 @@
+---
+---
+<section class="frec-sec">
+  <p class="frec-label">Frecuencia</p>
+  <h2 class="frec-h2">CUÁNTO NECESITAS ENTRENAR</h2>
+  <p class="frec-sub">Más días = mejores resultados. Pero incluso el mínimo genera cambios reales.</p>
+  <div class="frec-grid">
+    <div class="frec-cell">
+      <p class="frec-num">3</p>
+      <p class="frec-info">Días mínimo<br/>por semana</p>
+      <p class="frec-tag">Punto de partida</p>
+    </div>
+    <div class="frec-cell highlight">
+      <p class="frec-num big">5</p>
+      <p class="frec-info">Días ideales<br/>por semana</p>
+      <p class="frec-tag">Máximos resultados</p>
+    </div>
+    <div class="frec-cell">
+      <p class="frec-num">50m</p>
+      <p class="frec-info">Por sesión de<br/>entrenamiento</p>
+      <p class="frec-tag">Intenso y enfocado</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .frec-sec {
+    width: 100%;
+    background: #0a0a0a;
+    padding: clamp(48px, 7vw, 96px) clamp(20px, 6vw, 96px);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    box-sizing: border-box;
+  }
+  .frec-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #e5c178;
+    margin-bottom: 8px;
+  }
+  .frec-h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(28px, 5vw, 52px);
+    line-height: 1;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .frec-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 32px;
+    line-height: 1.6;
+  }
+  .frec-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .frec-cell {
+    background: #0a0a0a;
+    padding: clamp(20px, 4vw, 40px) 12px;
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .frec-cell:last-child { border-right: none; }
+  .frec-cell.highlight {
+    border-left: 1px solid rgba(229,193,120,0.25);
+    border-right: 1px solid rgba(229,193,120,0.25);
+  }
+  .frec-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(36px, 8vw, 64px);
+    color: #e5c178;
+    line-height: 1;
+  }
+  .frec-num.big {
+    font-size: clamp(44px, 10vw, 80px);
+  }
+  .frec-info {
+    font-size: clamp(9px, 2vw, 11px);
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 8px;
+    line-height: 1.5;
+  }
+  .frec-tag {
+    font-size: clamp(8px, 1.8vw, 10px);
+    color: rgba(229,193,120,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 6px;
+  }
+
+  @media (max-width: 480px) {
+    .frec-grid {
+      grid-template-columns: 1fr;
+      border-radius: 12px;
+    }
+    .frec-cell {
+      border-right: none;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 20px;
+    }
+    .frec-cell:last-child { border-bottom: none; }
+    .frec-cell.highlight {
+      border-left: none;
+      border-right: none;
+      border-top: 1px solid rgba(229,193,120,0.25);
+      border-bottom: 1px solid rgba(229,193,120,0.25);
+    }
+  }
+</style>
