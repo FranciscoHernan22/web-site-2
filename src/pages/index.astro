@@ -77,6 +77,16 @@ const planes = [
 const whatsapp = "526242404890"; // ← cambia por tu número real
 const mensaje = encodeURIComponent("Hola Francisco, quiero empezar mi asesoría. ¿Cómo empezamos?");
 const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
+
+function planWaLink(p: (typeof planes)[number]) {
+  const precioTexto = p.enfoqueDiario
+    ? `$${p.precioDiario}/día`
+    : `$${p.precioMensual.toLocaleString("es-MX")}/mes`;
+  const msg = encodeURIComponent(
+    `Hola Francisco, quiero empezar con el plan ${p.nombre} (${precioTexto}). ¿Cómo seguimos?`
+  );
+  return `https://wa.me/${whatsapp}?text=${msg}`;
+}
 ---
 
 <Layout title="FH Performance · Asesoría profesional en entrenamiento y salud">
@@ -298,9 +308,9 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
               ))}
             </div>
 
-            <a href="#contacto" class={`price-btn ${p.destacado ? "price-btn-destacado" : ""}`}>
+            <a href={planWaLink(p)} target="_blank" rel="noopener" class={`price-btn ${p.destacado ? "price-btn-destacado" : ""}`}>
               <span>Quiero empezar</span>
-              <i class="ti ti-arrow-up-right"></i>
+              <i class="ti ti-brand-whatsapp"></i>
             </a>
           </div>
         ))}
@@ -916,6 +926,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     transition: all .2s ease;
   }
   .price-btn:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); }
+  .price-btn i { font-size: 16px; }
 
   .price-btn-destacado {
     background: linear-gradient(135deg, var(--gold), #d9a94f);
