@@ -35,6 +35,45 @@ const features = [
   "Seguimiento por mensajería · nunca entrenas solo",
 ];
 
+const planes = [
+  {
+    id: "mensual",
+    nombre: "Mensual",
+    meses: 1,
+    precioMensual: 2000,
+    precioDiario: 67,
+    enfoqueDiario: true,
+    totalTexto: null,
+    antesTexto: null,
+    ahorro: null,
+    destacado: false,
+  },
+  {
+    id: "trimestral",
+    nombre: "Trimestral",
+    meses: 3,
+    precioMensual: 1600,
+    precioDiario: null,
+    enfoqueDiario: false,
+    totalTexto: "$4,800 pago único",
+    antesTexto: "$6,000",
+    ahorro: "Ahorra 20%",
+    destacado: false,
+  },
+  {
+    id: "semestral",
+    nombre: "Semestral",
+    meses: 6,
+    precioMensual: 1400,
+    precioDiario: null,
+    enfoqueDiario: false,
+    totalTexto: "$8,400 pago único",
+    antesTexto: "$12,000",
+    ahorro: "Ahorra 30%",
+    destacado: true,
+  },
+];
+
 const whatsapp = "526242404890"; // ← cambia por tu número real
 const mensaje = encodeURIComponent("Hola Francisco, quiero empezar mi asesoría. ¿Cómo empezamos?");
 const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
@@ -212,41 +251,64 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
 
   <!-- PLAN -->
   <section class="section plan-section" id="plan">
-    <div class="container-plan">
+    <div class="container">
       <div class="sec-head">
         <div class="accent center-block"></div>
-        <div class="eyebrow">Un solo plan · todo incluido</div>
+        <div class="eyebrow">Elige tu compromiso</div>
         <h2 class="sec-title">Tu inversión en salud</h2>
-        <p class="sec-sub">Sin complicarte eligiendo. Un método profesional para llevarte de cero a fuerte, con la app incluida.</p>
+        <p class="sec-sub">Entre más te comprometes, más ahorras. Los tres incluyen exactamente lo mismo — solo cambia cuánto pagas.</p>
       </div>
 
-      <div class="plan-card">
-        <div class="plan-tag"><i class="ti ti-star-filled"></i> ASESORÍA PROFESIONAL</div>
+      <div class="planes-grid">
+        {planes.map((p) => (
+          <div class={`price-card ${p.destacado ? "destacado" : ""}`}>
+            {p.destacado && (
+              <div class="price-tag"><i class="ti ti-star-filled"></i> MÁS POPULAR</div>
+            )}
 
-        <div class="plan-top">
-          <div class="plan-mode"><i class="ti ti-device-laptop"></i><span>ONLINE · CON APP INCLUIDA</span></div>
-          <div class="plan-price">$2,000<small> / mes</small></div>
-          <div class="plan-daily"><i class="ti ti-coin"></i> menos de $67 al día por cuidar tu cuerpo</div>
-        </div>
+            <div class="price-top">
+              <div class="price-nombre">{p.nombre}</div>
 
-        <div class="plan-sep"></div>
+              {p.enfoqueDiario ? (
+                <>
+                  <div class="price-monto">${p.precioDiario}<small> / día</small></div>
+                  <div class="price-total price-total-referencia">
+                    Equivale a ${p.precioMensual.toLocaleString("es-MX")} al mes
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div class="price-monto">${p.precioMensual.toLocaleString("es-MX")}<small> / mes</small></div>
+                  {p.totalTexto && (
+                    <div class="price-total">
+                      {p.antesTexto && <span class="price-antes">{p.antesTexto}</span>}
+                      {p.totalTexto}
+                    </div>
+                  )}
+                  {p.ahorro && <div class="price-ahorro">{p.ahorro}</div>}
+                </>
+              )}
+            </div>
 
-        <div class="feat">
-          {features.map((f) => (
-            <div class="feat-row"><i class="ti ti-circle-check-filled"></i> {f}</div>
-          ))}
-        </div>
+            <div class="price-sep"></div>
 
-        <div class="certeza">
-          <i class="ti ti-shield-check"></i>
-          <span>Resultados que se sostienen: no una rutina de tres meses, un hábito de salud para toda la vida.</span>
-        </div>
+            <div class="feat">
+              {features.map((f) => (
+                <div class="feat-row"><i class="ti ti-circle-check-filled"></i> {f}</div>
+              ))}
+            </div>
 
-        <a href="#contacto" class="plan-btn">
-          <span>Quiero empezar bien</span>
-          <i class="ti ti-arrow-up-right"></i>
-        </a>
-        <p class="plan-note"><i class="ti ti-message-circle"></i> Primero platicamos · veo si somos buen match</p>
+            <a href="#contacto" class={`price-btn ${p.destacado ? "price-btn-destacado" : ""}`}>
+              <span>Quiero empezar</span>
+              <i class="ti ti-arrow-up-right"></i>
+            </a>
+          </div>
+        ))}
+      </div>
+
+      <div class="certeza certeza-planes">
+        <i class="ti ti-shield-check"></i>
+        <span>Resultados que se sostienen: no una rutina de tres meses, un hábito de salud para toda la vida. Primero platicamos · veo si somos buen match.</span>
       </div>
     </div>
   </section>
@@ -387,7 +449,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .sec-head { text-align:center; margin-bottom: 40px; }
   .sec-head .eyebrow { display:block; margin-bottom: 8px; }
   .sec-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(30px,4vw,42px); color:#fff; letter-spacing:.02em; line-height:1.05; text-transform:uppercase; }
-  .sec-sub { font-size:13px; color:rgba(255,255,255,0.35); max-width:440px; margin:12px auto 0; line-height:1.5; }
+  .sec-sub { font-size:14px; color:rgba(255,255,255,0.4); max-width:460px; margin:12px auto 0; line-height:1.6; }
 
   /* NAV */
   .nav {
@@ -517,18 +579,18 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     }
     .primerAÑO {
       background-image: 
-        linear-gradient(180deg, rgb(7, 9, 12) 0%, rgb(7, 9, 12) 40%, rgb(7, 9, 12) 100%),
+        linear-gradient(180deg, rgba(7,9,12,0.55) 0%, rgba(7,9,12,0.4) 40%, rgba(7,9,12,0.68) 100%),
         url('/img/3m.webp');
       background-size: auto 130%;
     }
     .encuadre {
       background-image: 
-        linear-gradient(180deg, rgb(7, 9, 12) 0%, rgb(7, 9, 12) 40%, rgb(7, 9, 12) 100%),
+        linear-gradient(180deg, rgba(7,9,12,0.7) 0%, rgba(7,9,12,0.6) 40%, rgba(7,9,12,0.78) 100%),
         url('/img/4m.webp');
     }
     .plan-section {
       background-image:
-        linear-gradient(180deg, rgba(6, 7, 10, 0.874) 0%, rgba(6, 7, 10, 0.826) 50%, rgba(6,7,10,0.72) 100%),
+        linear-gradient(180deg, rgba(6, 7, 10, 0.7) 0%, rgba(6, 7, 10, 0.6) 50%, rgba(6,7,10,0.72) 100%),
         url('/img/5m.webp');
       background-size: auto 130%;
     }
@@ -634,7 +696,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .stat-cell:hover { background: rgba(240,198,116,0.04); }
   .stat-cell:last-child { border-right:none; }
   .stat-num { font-family:'Bebas Neue',sans-serif; font-size:clamp(32px,4vw,44px); color:var(--gold); line-height:1; }
-  .stat-label { font-family:'Barlow Condensed',sans-serif; font-size:9px; letter-spacing:.12em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-top:8px; line-height:1.3; }
+  .stat-label { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-top:8px; line-height:1.35; }
 
   .scroll-hint {
     position:absolute;
@@ -659,7 +721,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .card { background:var(--surface); border:1px solid var(--border); border-radius:12px; padding:28px; }
   .card-bar { width:28px; height:3px; background:var(--gold); margin-bottom:16px; }
   .card-title { font-family:'Barlow Condensed',sans-serif; font-size:18px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#fff; margin-bottom:10px; }
-  .card-text { font-size:14px; color:var(--muted); line-height:1.65; }
+  .card-text { font-size:15px; color:var(--muted); line-height:1.7; }
 
   /* PRIMER AÑO */
   .arco { display:flex; flex-direction:column; }
@@ -674,14 +736,14 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .etapa-body { padding-top:4px; }
   .etapa-mes { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
   .etapa-title { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#fff; margin-bottom:8px; }
-  .etapa-text { font-size:14px; color:var(--muted); line-height:1.6; }
+  .etapa-text { font-size:15px; color:var(--muted); line-height:1.65; }
   .app-box { margin-top:32px; background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px; display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
   .app-box-txt { flex:1; min-width:240px; }
   .app-eyebrow { display:flex; align-items:center; gap:6px; margin-bottom:8px; }
   .app-title { font-family:'Barlow Condensed',sans-serif; font-size:20px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; color:#fff; margin-bottom:8px; }
-  .app-text { font-size:14px; color:var(--muted); line-height:1.6; }
+  .app-text { font-size:15px; color:var(--muted); line-height:1.65; }
   .app-list { display:flex; flex-direction:column; gap:10px; min-width:200px; }
-  .app-list div { font-size:13px; color:#c5c5c5; display:flex; gap:8px; align-items:center; }
+  .app-list div { font-size:14px; color:#c5c5c5; display:flex; gap:8px; align-items:center; }
   .app-list i { color:var(--gold); font-size:16px; }
 
   /* TESTIMONIOS */
@@ -708,7 +770,7 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     pointer-events: none;
   }
   .testi-stars { color:var(--gold); font-size:14px; margin-bottom:16px; letter-spacing:2px; position: relative; }
-  .testi-text { font-size:14px; color:var(--muted); line-height:1.65; margin-bottom:20px; flex:1; position: relative; }
+  .testi-text { font-size:15px; color:var(--muted); line-height:1.7; margin-bottom:20px; flex:1; position: relative; }
   .testi-foot { display:flex; align-items:center; gap:12px; border-top:1px solid var(--border); padding-top:16px; }
   .testi-ini {
     width:40px; height:40px; border-radius:50%;
@@ -728,38 +790,44 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .frec-num { font-family:'Bebas Neue',sans-serif; color:var(--gold); line-height:1; }
   .frec-num.sm { font-size:clamp(48px,6vw,56px); }
   .frec-num.lg { font-size:clamp(56px,8vw,80px); }
-  .frec-label { font-size:10px; color:rgba(255,255,255,0.4); text-transform:uppercase; letter-spacing:.08em; margin-top:12px; line-height:1.5; }
-  .frec-sub { font-size:10px; color:rgba(240,198,116,0.6); text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
+  .frec-label { font-size:11px; color:rgba(255,255,255,0.45); text-transform:uppercase; letter-spacing:.08em; margin-top:12px; line-height:1.5; }
+  .frec-sub { font-size:11px; color:rgba(240,198,116,0.65); text-transform:uppercase; letter-spacing:.08em; margin-top:6px; }
 
-  /* PLAN */
-  .plan-card {
+  /* PLANES DE PRECIO */
+  .planes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    align-items: start;
+  }
+
+  .price-card {
     background: linear-gradient(180deg, var(--surface) 0%, #0d1015 100%);
     border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 40px 32px 32px;
+    border-radius: 18px;
+    padding: 32px 24px 28px;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+
+  .price-card.destacado {
+    border-color: rgba(240,198,116,0.5);
     box-shadow:
-      0 0 0 1px rgba(240,198,116,0.08),
-      0 20px 60px rgba(0,0,0,0.5),
-      0 0 40px rgba(240,198,116,0.04);
+      0 0 0 1px rgba(240,198,116,0.15),
+      0 24px 60px rgba(0,0,0,0.5),
+      0 0 40px rgba(240,198,116,0.06);
+    transform: translateY(-8px);
   }
 
-  .plan-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    border-radius: 20px;
-    padding: 1px;
-    background: linear-gradient(135deg, rgba(240,198,116,0.5), rgba(240,198,116,0) 40%, rgba(240,198,116,0.15) 100%);
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
+  @media (max-width: 900px) {
+    .price-card.destacado { transform: none; }
   }
 
-  .plan-tag {
+  .price-tag {
     position: absolute;
-    top: -13px;
+    top: -12px;
     left: 50%;
     transform: translateX(-50%);
     display: inline-flex;
@@ -770,49 +838,104 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     font-family: 'Barlow Condensed', sans-serif;
     font-size: 10px;
     letter-spacing: .12em;
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 99px;
     font-weight: 700;
     white-space: nowrap;
     box-shadow: 0 4px 16px rgba(240,198,116,0.3);
   }
-  .plan-tag i { font-size: 12px; }
+  .price-tag i { font-size: 11px; }
 
-  .plan-top { text-align: center; margin-bottom: 8px; }
-  .plan-mode { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 14px; }
-  .plan-mode i { font-size: 18px; color: var(--gold); }
-  .plan-mode span { font-family: 'Barlow Condensed', sans-serif; font-size: 11px; letter-spacing: .14em; color: var(--gold); }
+  .price-top { text-align: center; margin-bottom: 8px; }
+  .price-nombre {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .destacado .price-nombre { color: var(--gold); }
 
-  .plan-price {
+  .price-monto {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 56px;
+    font-size: 42px;
     color: #fff;
     line-height: 1;
-    text-shadow: 0 2px 20px rgba(240,198,116,0.15);
   }
-  .plan-price small { font-size: 17px; color: #777; font-family: 'Barlow Condensed', sans-serif; }
+  .price-monto small { font-size: 14px; color: #777; font-family: 'Barlow Condensed', sans-serif; }
 
-  .plan-daily {
+  .price-total { font-size: 12.5px; color: #999; margin-top: 8px; }
+  .price-total-referencia { font-size: 12.5px; color: var(--gold); opacity: 0.85; }
+  .price-antes {
+    text-decoration: line-through;
+    color: #5a5a5a;
+    margin-right: 6px;
+  }
+  .price-ahorro {
+    display: inline-block;
+    margin-top: 10px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(240,198,116,0.08);
+    border: 1px solid rgba(240,198,116,0.25);
+    padding: 4px 10px;
+    border-radius: 99px;
+  }
+
+  .price-sep {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
+    margin: 22px 0;
+  }
+
+  .price-card .feat { flex: 1; margin-bottom: 24px; }
+  .price-card .feat-row { font-size: 13.5px; }
+
+  .price-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    font-size: 12px;
-    color: #8a8a8a;
-    margin-top: 10px;
+    gap: 8px;
+    background: transparent;
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.18);
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 14px;
+    text-decoration: none;
+    border-radius: 10px;
+    transition: all .2s ease;
   }
-  .plan-daily i { color: var(--gold); font-size: 14px; }
+  .price-btn:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.03); }
 
-  .plan-sep {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, var(--border) 20%, var(--border) 80%, transparent);
-    margin: 26px 0;
+  .price-btn-destacado {
+    background: linear-gradient(135deg, var(--gold), #d9a94f);
+    color: var(--bg);
+    border-color: transparent;
+    box-shadow: 0 8px 24px rgba(240,198,116,0.2);
+  }
+  .price-btn-destacado:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(240,198,116,0.3);
+    background: linear-gradient(135deg, var(--gold), #d9a94f);
   }
 
-  .feat { display: flex; flex-direction: column; gap: 13px; margin-bottom: 26px; }
-  .feat-row { font-size: 13.5px; color: #d0d0d0; display: flex; gap: 10px; align-items: flex-start; }
-  .feat-row i { color: var(--gold); font-size: 18px; margin-top: 0px; flex-shrink: 0; }
+  .certeza-planes { max-width: 640px; margin: 32px auto 0; }
 
+  @media (max-width: 900px) {
+    .planes-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  }
+
+  /* PLAN (legacy — reutilizado por .certeza) */
   .certeza {
     background: linear-gradient(135deg, rgba(240,198,116,0.06), rgba(240,198,116,0.02));
     border: 1px solid rgba(240,198,116,0.2);
@@ -826,39 +949,9 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   .certeza i { color: var(--gold); font-size: 19px; margin-top: 1px; flex-shrink: 0; }
   .certeza span { font-size: 12.5px; color: #c9c0a8; line-height: 1.55; }
 
-  .plan-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    background: linear-gradient(135deg, var(--gold), #d9a94f);
-    color: var(--bg);
-    font-family: 'Barlow Condensed', sans-serif;
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    padding: 17px;
-    text-decoration: none;
-    border-radius: 10px;
-    transition: transform .2s ease, box-shadow .2s ease;
-    box-shadow: 0 8px 24px rgba(240,198,116,0.2);
-  }
-  .plan-btn i { font-size: 17px; transition: transform .2s ease; }
-  .plan-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(240,198,116,0.3); }
-  .plan-btn:hover i { transform: translate(2px,-2px); }
-
-  .plan-note {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-    font-size: 11.5px;
-    color: #666;
-    text-align: center;
-    margin-top: 14px;
-  }
-  .plan-note i { font-size: 14px; }
+  .feat { display: flex; flex-direction: column; gap: 13px; }
+  .feat-row { font-size: 13.5px; color: #d0d0d0; display: flex; gap: 10px; align-items: flex-start; }
+  .feat-row i { color: var(--gold); font-size: 18px; margin-top: 0px; flex-shrink: 0; }
 
   /* CONTACTO */
   .contacto-box {
@@ -914,9 +1007,9 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
   }
 
   .contacto-text {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--muted);
-    line-height: 1.65;
+    line-height: 1.7;
     max-width: 360px;
     margin: 0 auto 32px;
     position: relative;
@@ -958,10 +1051,10 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     align-items: center;
     gap: 6px;
     font-family: 'Barlow Condensed', sans-serif;
-    font-size: 11px;
+    font-size: 12px;
     text-transform: uppercase;
     letter-spacing: .08em;
-    color: #777;
+    color: #888;
   }
   .contacto-note i { font-size: 14px; color: var(--gold); }
 
@@ -1025,7 +1118,6 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     .frec-cell:last-child { border-bottom:none; }
     .app-box { flex-direction:column; align-items:flex-start; }
     .app-list { min-width:0; width:100%; }
-    .plan-card { padding:24px 20px; }
     .contacto-box { padding:36px 22px; }
     .wa-btn { width: 100%; justify-content: center; }
   }
@@ -1048,8 +1140,6 @@ const waLink = `https://wa.me/${whatsapp}?text=${mensaje}`;
     .stat-cell { border-right:none !important; border-bottom:1px solid rgba(255,255,255,0.07); padding: 20px 12px; }
     .stat-cell:last-child { border-bottom:none; }
 
-    .plan-tag { font-size: 9px; padding: 5px 12px; }
-    .plan-price { font-size: 44px; }
     .contacto-icon { width: 48px; height: 48px; }
     .contacto-icon i { font-size: 22px; }
     .contacto-title { margin-bottom: 10px; }
