@@ -1,0 +1,95 @@
+---
+const contactEmail = "contacto@franciscoentrenadorcabos.com"; // cambia por tu correo real
+const fecha = new Date().toLocaleDateString("es-MX", { year: "numeric", month: "long", day: "numeric" });
+---
+
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Política de Privacidad — Personal Fit App</title>
+	</head>
+	<body class="bg-gray-50 text-gray-800">
+		<div class="max-w-3xl mx-auto px-6 py-16">
+
+			<h1 class="text-3xl font-bold text-gray-900 mb-2">Política de Privacidad</h1>
+			<p class="text-sm text-gray-500 mb-10">Última actualización: {fecha}</p>
+
+			<p class="mb-8 leading-relaxed">
+				Personal Fit App ("la App") es una aplicación complementaria a un servicio de entrenamiento
+				personal. Esta política explica qué información recolectamos, cómo la usamos y cómo la protegemos.
+			</p>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Información que recolectamos</h2>
+				<ul class="list-disc pl-6 space-y-2 leading-relaxed">
+					<li><span class="font-medium">Datos de cuenta:</span> nombre y correo electrónico, proporcionados por el entrenador al dar de alta al cliente en el sistema.</li>
+					<li><span class="font-medium">Datos de entrenamiento:</span> rutinas asignadas, progreso, peso y otras métricas relacionadas con el seguimiento del cliente.</li>
+					<li><span class="font-medium">Fotos de progreso físico:</span> imágenes que el usuario decide subir voluntariamente para dar seguimiento visual a su progreso.</li>
+				</ul>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Cómo usamos la información</h2>
+				<p class="mb-3 leading-relaxed">Usamos esta información exclusivamente para:</p>
+				<ul class="list-disc pl-6 space-y-2 leading-relaxed">
+					<li>Permitir que el entrenador asigne y dé seguimiento a rutinas personalizadas.</li>
+					<li>Mostrar al usuario su historial de entrenamiento y progreso dentro de la App.</li>
+				</ul>
+				<p class="mt-3 leading-relaxed">No vendemos ni compartimos esta información con terceros con fines publicitarios.</p>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Almacenamiento y seguridad</h2>
+				<p class="leading-relaxed">
+					La información se almacena en nuestros servidores propios con medidas razonables de
+					seguridad para proteger los datos de accesos no autorizados.
+				</p>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Acceso a las cuentas</h2>
+				<p class="leading-relaxed">
+					Los usuarios no se registran de forma autónoma dentro de la App. Las cuentas son creadas
+					por el entrenador a través de un sistema externo, quien comparte las credenciales de
+					acceso directamente con el cliente.
+				</p>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Derechos del usuario</h2>
+				<p class="leading-relaxed">
+					El usuario puede solicitar la corrección o eliminación de sus datos personales
+					contactando directamente a su entrenador o escribiendo a
+					<a href={`mailto:${contactEmail}`} class="text-blue-600 underline">{contactEmail}</a>.
+				</p>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Retención de datos</h2>
+				<p class="leading-relaxed">
+					Conservamos los datos mientras la cuenta del usuario permanezca activa en el sistema
+					del entrenador. El usuario puede solicitar la eliminación de su cuenta y datos en
+					cualquier momento.
+				</p>
+			</section>
+
+			<section class="mb-8">
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Cambios a esta política</h2>
+				<p class="leading-relaxed">
+					Podemos actualizar esta política ocasionalmente. Notificaremos cambios importantes a
+					través de la App o por correo electrónico.
+				</p>
+			</section>
+
+			<section>
+				<h2 class="text-xl font-semibold text-gray-900 mb-3">Contacto</h2>
+				<p class="leading-relaxed">
+					Para preguntas sobre esta política de privacidad, contáctanos en
+					<a href={`mailto:${contactEmail}`} class="text-blue-600 underline">{contactEmail}</a>.
+				</p>
+			</section>
+
+		</div>
+	</body>
+</html>

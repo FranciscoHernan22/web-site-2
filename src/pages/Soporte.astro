@@ -1,0 +1,53 @@
+---
+const contactEmail = "contacto@franciscoentrenadorcabos.com"; // cambia por tu correo real
+---
+
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Soporte — Personal Fit App</title>
+	</head>
+	<body class="bg-gray-50 text-gray-800">
+		<div class="max-w-3xl mx-auto px-6 py-16">
+
+			<h1 class="text-3xl font-bold text-gray-900 mb-8">Soporte</h1>
+
+			<p class="mb-8 leading-relaxed">¿Tienes dudas o problemas con la App? Escríbenos, con gusto te ayudamos.</p>
+
+			<div class="bg-white border border-gray-200 rounded-lg p-6 mb-10">
+				<p class="text-sm text-gray-500 mb-1">Contacto</p>
+				<a href={`mailto:${contactEmail}`} class="text-lg font-medium text-blue-600 underline">
+					{contactEmail}
+				</a>
+			</div>
+
+			<h2 class="text-xl font-semibold text-gray-900 mb-4">Preguntas frecuentes</h2>
+
+			<div class="space-y-6">
+				<div>
+					<p class="font-medium text-gray-900">¿Cómo obtengo mi usuario y contraseña?</p>
+					<p class="leading-relaxed">Las cuentas son creadas por tu entrenador. Si aún no las recibiste, contacta directamente a tu entrenador.</p>
+				</div>
+
+				<div>
+					<p class="font-medium text-gray-900">¿Olvidé mi contraseña, qué hago?</p>
+					<p class="leading-relaxed">Contacta a tu entrenador para que restablezca tu acceso.</p>
+				</div>
+
+				<div>
+					<p class="font-medium text-gray-900">¿La App tiene costo?</p>
+					<p class="leading-relaxed">La App es gratuita para descargar. El servicio de entrenamiento personal se gestiona directamente con tu entrenador.</p>
+				</div>
+
+				<div>
+					<p class="font-medium text-gray-900">¿Cómo reporto un problema técnico?</p>
+					<p class="leading-relaxed">
+						Escríbenos a <a href={`mailto:${contactEmail}`} class="text-blue-600 underline">{contactEmail}</a> describiendo el problema, e incluye capturas de pantalla si es posible.
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</body>
+</html>
